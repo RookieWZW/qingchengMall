@@ -115,7 +115,7 @@ public class TemplateServiceImpl implements TemplateService {
             if(searchMap.get("id")!=null ){
                 criteria.andEqualTo("id",searchMap.get("id"));
             }
-            // 规格数量
+            // 规格数量Spc
             if(searchMap.get("specNum")!=null ){
                 criteria.andEqualTo("specNum",searchMap.get("specNum"));
             }

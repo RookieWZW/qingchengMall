@@ -3,8 +3,10 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qingcheng.dao.ParaMapper;
+import com.qingcheng.dao.TemplateMapper;
 import com.qingcheng.entity.PageResult;
 import com.qingcheng.pojo.goods.Para;
+import com.qingcheng.pojo.goods.Template;
 import com.qingcheng.service.goods.ParaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
@@ -12,11 +14,14 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service(interfaceClass = ParaService.class)
 public class ParaServiceImpl implements ParaService {
 
     @Autowired
     private ParaMapper paraMapper;
+
+    @Autowired
+    private TemplateMapper templateMapper;
 
     /**
      * 返回全部记录
@@ -77,6 +82,9 @@ public class ParaServiceImpl implements ParaService {
      */
     public void add(Para para) {
         paraMapper.insert(para);
+        Template template = templateMapper.selectByPrimaryKey(para.getTemplateId());
+        template.setParaNum(template.getParaNum()+1);
+        templateMapper.updateByPrimaryKey(template);
     }
 
     /**
@@ -92,6 +100,10 @@ public class ParaServiceImpl implements ParaService {
      * @param id
      */
     public void delete(Integer id) {
+        Para para = paraMapper.selectByPrimaryKey(id);
+        Template template = templateMapper.selectByPrimaryKey(para.getTemplateId());
+        template.setParaNum( template.getParaNum()-1 );
+        templateMapper.updateByPrimaryKey(template);
         paraMapper.deleteByPrimaryKey(id);
     }
 
