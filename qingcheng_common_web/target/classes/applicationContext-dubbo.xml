@@ -15,7 +15,4 @@
 	<dubbo:registry protocol="zookeeper" address="${zk.address}"/>
 	<dubbo:annotation package="com.qingcheng.controller" />
 
-
-	<dubbo:consumer timeout="8000" retries="0" check="false"/>
-
 </beans>

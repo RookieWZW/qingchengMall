@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
     <artifactId>qingcheng_service_goods</artifactId>
+
     <dependencies>
         <dependency>
             <groupId>com.qingcheng</groupId>
